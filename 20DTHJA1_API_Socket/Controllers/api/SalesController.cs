@@ -17,10 +17,15 @@ namespace API_DACN.Controllers.api
         {
             this.productService = productService;
         }
-        // AHUHU
-        //124457
-//---------------------------------------------------------------------------------------------------------------------------------------------
-//---------------------------------------------------------------------------------------------------------------------------------------------
+        [HttpGet]
+        [Route("get-LiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLive-list")]
+        public IActionResult getLiveLiveList()
+        {
+            List<Live> lvietList = productService.getLive();
+            return Ok(new { status = true, message = "", data = lvietList });
+        }
+        //---------------------------------------------------------------------------------------------------------------------------------------------
+        //---------------------------------------------------------------------------------------------------------------------------------------------
         [HttpGet]
         [Route("get-Live-list")]
         public IActionResult getLiveList()
