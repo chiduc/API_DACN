@@ -18,7 +18,7 @@ namespace API_DACN.Controllers.api
             this.productService = productService;
         }
         [HttpGet]
-        [Route("get-LiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLive-list")]
+        [Route("get-LiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLi23876478237689467veLiveLiveLiveLiveLiveLiveLiveLiveLive-list")]
         public IActionResult getLiveLiveList()
         {
             List<Live> lvietList = productService.getLive();
