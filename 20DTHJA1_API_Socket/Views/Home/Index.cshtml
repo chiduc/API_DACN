@@ -1,11 +1,16 @@
-﻿<!DOCTYPE html>
+@{
+    ViewData["Title"] = "Login Page";
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <link rel="stylesheet" href="styles.css">
+
     <link href="~/css/styles.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -19,8 +24,48 @@
 
             <button type="button" onclick="login()">Login</button>
         </form>
+        <div id="errorMessage" class="alert alert-danger" style="display:none;"></div>
     </div>
+
     <script src="~/js/login.js"></script>
-  @*   <script src="login.js"></script> *@
+    <script>
+        $(document).ready(function () {
+            $("#password").keypress(function (e) {
+                if (e.which === 13) {
+                    login();
+                }
+            });
+        });
+
+        function login() {
+            var username = $("#username").val();
+            var password = $("#password").val();
+
+            $.ajax({
+                type: "POST",
+                url: "/Home/Login",
+                data: { username: username, password: password },
+                success: function (result) {
+                    if (result.success) {
+                        window.location.href = "/Home/Home";
+                    } else {
+                        displayErrorMessage(result.message);
+                    }
+                },
+                error: function () {
+                    displayErrorMessage("Đã xảy ra lỗi khi đăng nhập. Vui lòng thử lại.");
+                }
+            });
+        }
+
+        function displayErrorMessage(message) {
+            $("#errorMessage").text(message);
+            $("#errorMessage").show();
+
+            setTimeout(function () {
+                $("#errorMessage").hide();
+            }, 3000);
+        }
+    </script>
 </body>
 </html>
