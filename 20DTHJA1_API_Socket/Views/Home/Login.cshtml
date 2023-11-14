@@ -1,0 +1,46 @@
+﻿@page
+@model _20DTHJA1_API_Socket.Views.Home.LoginModel
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+
+    <link href="~/css/styles.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <form id="loginForm">
+            <h2>Đăng nhập quản trị admin</h2>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="button" onclick="login()">Login</button>
+        </form>
+    </div>
+    <script src="~/js/login.js"></script>
+    <script>
+        function login() {
+            // Thực hiện kiểm tra đăng nhập ở đây
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            // Thực hiện kiểm tra đăng nhập thành công
+            if (username === "admin" && password === "admin123") {
+                // Chuyển hướng đến trang quản trị sau khi đăng nhập thành công
+                window.location.href = "/Home/Home"; // Thay đổi đường dẫn tùy thuộc vào cấu trúc của ứng dụng của bạn
+            } else {
+                alert("Đăng nhập không thành công. Vui lòng thử lại.");
+            }
+        }
+    </script>
+
+</body>
+</html>
+
