@@ -1,4 +1,4 @@
-﻿using API_DACN.Models;
+using API_DACN.Models;
 using Libs.Entities;
 using Libs.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -25,9 +25,17 @@ namespace API_DACN.Controllers
         {
             return View();
         }
-        public IActionResult Login()
+        public IActionResult Login(string username, string password)
         {
-            return View();
+            // Thực hiện kiểm tra đăng nhập ở đây
+            if (username == "admin" && password == "admin1")
+            {
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Sai tên đăng nhập hoặc mật khẩu. Vui lòng thử lại." });
+            }
         }
         public IActionResult Home()
         {
