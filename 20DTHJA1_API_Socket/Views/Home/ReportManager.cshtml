@@ -1,0 +1,52 @@
+﻿@* @model List<Report>
+ *@
+@{
+    ViewData["Title"] = "Danh Sách Báo Cáo";
+}
+
+<!-- Nội dung của trang quản lý report -->
+<div class="container mt-4">
+    <h2>@ViewData["Title"]</h2>
+
+    <!-- Bảng hiển thị danh sách các bản báo cáo -->
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nội dung</th>
+                <th>Ngày Báo Cáo</th>
+                <th>Người Báo Cáo</th>
+                <th>Người Bị Báo Cáo</th>
+                <th>Trạng Thái</th>
+                <th>Thời Hạn Khóa</th>
+                <th>Chỉnh Sửa</th>
+                <th>Lượt Báo Cáo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var report in Model)
+                {
+                    <tr>
+                        <td>@report.ID_RP</td>
+                        <td>@report.NoiDung</td>
+                        <td>@report.Time_RP.ToString("yyyy-MM-dd")</td>
+                        <td>@report.Reporter</td>
+                        <td>@report.ReportedUser</td>
+                        <td>@report.Status_Rp</td>
+                        <td>@report.Time_Band?.ToString("yyyy-MM-dd")</td>
+                        <td><a href="@Url.Action("Edit", new { id = report.ID_RP })" class="btn btn-primary">Chỉnh Sửa</a></td>
+                        <td>@report.ReportCount</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="9">Danh sách báo cáo trống</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

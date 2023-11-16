@@ -17,16 +17,7 @@ namespace API_DACN.Controllers.api
         {
             this.productService = productService;
         }
-        [HttpGet]
 
-
-
-        [Route("get-LiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLiveLi23876478237689467veLiveLiveLiveLiveLiveLiveLiveLiveLive-list")]
-        public IActionResult getLiveLiveList()
-        {
-            List<Live> lvietList = productService.getLive();
-            return Ok(new { status = true, message = "", data = lvietList });
-        }
         //---------------------------------------------------------------------------------------------------------------------------------------------
         //---------------------------------------------------------------------------------------------------------------------------------------------
         [HttpGet]
@@ -40,6 +31,7 @@ namespace API_DACN.Controllers.api
         [Route("insert-live")]
         public IActionResult insert_live(int idLive , string name)
         {
+            
             Live lie = new Live();
             lie.idLive = idLive;
             lie.name = name;

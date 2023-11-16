@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link href="~/css/styles.css" rel="stylesheet" />
-
 </head>
 <body>
     <header>
@@ -20,24 +19,27 @@
             <i class="fa fa-bell"></i>
             <span class="badge">3</span>
         </div>
-        <div class="user-info">
+        <div class="user-info" id="userDropdown">
             <img src="user-avatar.png" alt="User Avatar">
             <span>Admin User</span>
             <i class="fa fa-caret-down"></i>
+            <div class="dropdown-content">
+                <a href="#">Thông tin cá nhân</a>
+                <a href="#">Đăng xuất</a>
+            </div>
         </div>
     </header>
 
     <nav>
         <ul>
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Giỏ hàng</a></li>
-            <li><a href="#">Báo cáo</a></li>
+            <li><a href="#" onclick="navigateTo('dashboard.html')">Dashboard</a></li>
+            <li><a href="#" onclick="navigateTo('giohang.html')">Giỏ hàng</a></li>
+            <li><a href="#" onclick="navigateTo('quanlyreport.html')">Quản Lý Report</a></li>
             <li class="dropdown">
                 <a href="#">Quản lý</a>
                 <div class="dropdown-content">
-                    <a href="#">Quản lý Sản phẩm</a>
-                    <a href="#">Quản lý Người dùng</a>
-                    <!-- Các mục khác -->
+                    <a href="#" onclick="navigateTo('quanlysanpham.html')">Quản lý Sản phẩm</a>
+                    <a href="#" onclick="navigateTo('quanlynguoidung.html')">Quản lý Người dùng</a>
                 </div>
             </li>
         </ul>
