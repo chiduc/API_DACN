@@ -26,18 +26,18 @@ namespace Libs.Services
             this.dbContext.SaveChanges();
         }
         
-        public List<Live> getLive()
+        public List<LiveRoom> getLive()
         {
             return dbContext.Live.ToList();
         }
-        public void insertLive(Live lie)
+        public void insertLive(LiveRoom lie)
         {
             LiveRepository.insertLive(lie);
             Save();
             
         }
 
-        public void delete_live(Live lie)
+        public void delete_live(LiveRoom lie)
         {
             if (lie != null)
             {
@@ -88,16 +88,16 @@ namespace Libs.Services
             }
 
         } 
-        public Live GetLiveByID(int id_live)
+        public LiveRoom GetLiveByID(int id_live)
         {
-           return dbContext.Live.FirstOrDefault(p => p.idLive == id_live); 
+           return dbContext.Live.FirstOrDefault(p => p.ID_LR == id_live); 
 
         }
         public List<Product> getProducts()
         {
             return dbContext.Product.ToList();
         }
-        public List<Student> getStudents()
+        public List<Client> getStudents()
         {
             return dbContext.Student.ToList();
         }

@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace Libs.Entities
 {
-    public class Live
+    public class LiveRoom
     {
         [Key]
-        public int idLive { get; set; }
-        public string name { get; set; }
+        public int ID_LR { get; set; }
+        public int ID_Client { get; set; }
+        public bool IsLive { get; set; }
     }
 }

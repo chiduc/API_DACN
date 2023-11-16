@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 
 namespace Libs.Repositories
 {
-    public interface IStudentRepository : IRepository<Student>
+    public interface IStudentRepository : IRepository<Client>
     {
-        public void insertStudent(Student Student);
+        public void insertStudent(Client Student);
     }
-    public class StudentRepository : RepositoryBase<Student>, IStudentRepository
+    public class StudentRepository : RepositoryBase<Client>, IStudentRepository
     {
         public StudentRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
         }
-        public void insertStudent(Student Student)
+        public void insertStudent(Client Student)
         {
             _dbContext.Student.Add(Student);
         }

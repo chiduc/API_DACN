@@ -24,19 +24,18 @@ namespace API_DACN.Controllers.api
         [Route("get-Live-list")]
         public IActionResult getLiveList()
         {
-            List<Live> lvietList = productService.getLive();
+            List<LiveRoom> lvietList = productService.getLive();
             return Ok(new { status = true, message = "", data = lvietList });
         }
         [HttpPost]
         [Route("insert-live")]
-        public IActionResult insert_live(int idLive , string name)
+        public IActionResult insert_live( int id_client)
         {
             
-            Live lie = new Live();
-            lie.idLive = idLive;
-            lie.name = name;
+            LiveRoom LR = new LiveRoom();
+            LR.ID_Client = id_client;
 
-            productService.insertLive(lie);
+            productService.insertLive(LR);
             return Ok(new { status = true, message = "" });
         }
         [HttpPost]
@@ -44,7 +43,7 @@ namespace API_DACN.Controllers.api
         public IActionResult delete_live(int idLive)
         {
 
-            Live liveDelete = productService.GetLiveByID(idLive);
+            LiveRoom liveDelete = productService.GetLiveByID(idLive);
 
             if (delete_live == null)
             {
@@ -118,7 +117,7 @@ namespace API_DACN.Controllers.api
         [Route("get-student-list")]
         public IActionResult getStudentList()
         {
-            List<Student> studentList = productService.getStudents();
+            List<Client> studentList = productService.getStudents();
             return Ok(new { status = true, message = "", data = studentList });
         }
 

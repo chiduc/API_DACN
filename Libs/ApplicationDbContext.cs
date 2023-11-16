@@ -6,9 +6,9 @@ namespace Libs
 {
     public class ApplicationDbContext: IdentityDbContext
     {
-        public DbSet<Live> Live { get; set; }
+        public DbSet<LiveRoom> Live { get; set; }
         public DbSet<Product> Product { get; set; }
-        public DbSet<Student> Student { get; set; }
+        public DbSet<Client> Student { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }

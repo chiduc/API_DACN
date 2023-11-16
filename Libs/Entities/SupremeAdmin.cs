@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Libs.Entities
 {
-    internal class Login
+    public class SupremeAdmin
     {
+
     }
 }

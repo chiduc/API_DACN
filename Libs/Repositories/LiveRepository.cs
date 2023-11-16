@@ -9,25 +9,25 @@ using System.Threading.Tasks;
 
 namespace Libs.Repositories
 {
-    public interface IPLiveRepository : IRepository<Live>
+    public interface IPLiveRepository : IRepository<LiveRoom>
     {
-        public void insertLive(Live lie);
-        public void delete_live(Live lie);
+        public void insertLive(LiveRoom lie);
+        public void delete_live(LiveRoom lie);
     }
-    public class LiveRepository : RepositoryBase<Live>, IPLiveRepository
+    public class LiveRepository : RepositoryBase<LiveRoom>, IPLiveRepository
     {
         public LiveRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
         }
 
-        public void insertLive(Live lie)
+        public void insertLive(LiveRoom lie)
         {
-            _dbContext.Database.ExecuteSqlRaw("EXEC dbo.InsertLive @IdLive={0}, @NameLive={1}", lie.idLive,lie.name);
+            _dbContext.Database.ExecuteSqlRaw("EXEC Proc_Insert_LiveRoom @Id_client={0}", lie.ID_LR);
             //_dbContext.Live.Add(lie);
         }
         
 
-        public void delete_live(Live lie)
+        public void delete_live(LiveRoom lie)
         {
             if (lie == null)
             {
