@@ -12,15 +12,12 @@ namespace Libs.Services
     public class ProductService
     {
         private ApplicationDbContext dbContext;
-        private IPLiveRepository LiveRepository;
         private IProductRepository productRepository;
-        private IStudentRepository studentRepository;
 
         public ProductService(ApplicationDbContext dbContext) { 
             this.dbContext = dbContext; 
-            this.LiveRepository = new LiveRepository(dbContext);
+           
             this.productRepository = new ProductRepository(dbContext);
-            this.studentRepository = new StudentRepository(dbContext);
         }
         public void Save() { 
             this.dbContext.SaveChanges();
@@ -28,24 +25,11 @@ namespace Libs.Services
         
         public List<LiveRoom> getLive()
         {
-            return dbContext.Live.ToList();
-        }
-        public void insertLive(LiveRoom lie)
-        {
-            LiveRepository.insertLive(lie);
-            Save();
-            
+            return dbContext.Liveroom.ToList();
         }
 
-        public void delete_live(LiveRoom lie)
-        {
-            if (lie != null)
-            {
-                LiveRepository.delete_live(lie);
-                Save();
-            }
 
-        }
+
         // -----------------------------------------------------------
         public void insertProduct(Product product)
         {
@@ -90,16 +74,13 @@ namespace Libs.Services
         } 
         public LiveRoom GetLiveByID(int id_live)
         {
-           return dbContext.Live.FirstOrDefault(p => p.ID_LR == id_live); 
+           return dbContext.Liveroom.FirstOrDefault(p => p.ID_LR == id_live); 
 
         }
         public List<Product> getProducts()
         {
             return dbContext.Product.ToList();
         }
-        public List<Client> getStudents()
-        {
-            return dbContext.Student.ToList();
-        }
+
     }
 }

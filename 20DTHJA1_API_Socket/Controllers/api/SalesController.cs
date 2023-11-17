@@ -1,9 +1,7 @@
 ﻿using API_DACN.Models;
 using Libs.Entities;
 using Libs.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace API_DACN.Controllers.api
 {
@@ -12,10 +10,23 @@ namespace API_DACN.Controllers.api
     public class SalesController : ControllerBase
     {
         private ProductService productService;
+        private ClientService clientService;
+        private LiveRoomService liveRoomService;
+
 
         public SalesController(ProductService productService)
         {
             this.productService = productService;
+        }
+        [HttpPost]
+        [Route("Login_Client")]
+        public IActionResult login_Client(string username, string password)
+        {
+            ClientModel clientModel = new ClientModel();
+            clientModel.Name_Client = username;
+            clientModel.Pass_Client = password;
+            List<ClientModel> cli_m = clientService.login_Client(clientModel);
+            return Ok(new { status = true, message = "", data = cli_m });
         }
 
         //---------------------------------------------------------------------------------------------------------------------------------------------
@@ -29,13 +40,13 @@ namespace API_DACN.Controllers.api
         }
         [HttpPost]
         [Route("insert-live")]
-        public IActionResult insert_live( int id_client)
+        public IActionResult insert_live(int id_client)
         {
-            
+
             LiveRoom LR = new LiveRoom();
             LR.ID_Client = id_client;
 
-            productService.insertLive(LR);
+            liveRoomService.insertLive(LR);
             return Ok(new { status = true, message = "" });
         }
         [HttpPost]
@@ -50,7 +61,7 @@ namespace API_DACN.Controllers.api
                 return NotFound(new { status = false, message = "LIVE không tồn tại bbbbbb" });
             }
 
-            productService.delete_live(liveDelete);
+          //  productService.delete_live(liveDelete);
 
             return Ok(new { status = true, message = "" });
         }
@@ -113,13 +124,6 @@ namespace API_DACN.Controllers.api
             return Ok(new { status = true, message = "", data = productList });
         }
 //---------------------------------------------------------------------------------------------------------------------------------------------
-        [HttpGet]
-        [Route("get-student-list")]
-        public IActionResult getStudentList()
-        {
-            List<Client> studentList = productService.getStudents();
-            return Ok(new { status = true, message = "", data = studentList });
-        }
 
     }
 }

@@ -14,15 +14,15 @@ namespace Libs.Repositories
         public void insertLive(LiveRoom lie);
         public void delete_live(LiveRoom lie);
     }
-    public class LiveRepository : RepositoryBase<LiveRoom>, IPLiveRepository
+    public class LiveRoomRepository : RepositoryBase<LiveRoom>, IPLiveRepository
     {
-        public LiveRepository(ApplicationDbContext dbContext) : base(dbContext)
+        public LiveRoomRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
         }
 
         public void insertLive(LiveRoom lie)
         {
-            _dbContext.Database.ExecuteSqlRaw("EXEC Proc_Insert_LiveRoom @Id_client={0}", lie.ID_LR);
+            _dbContext.Database.ExecuteSqlRaw("EXEC Proc_Insert_LiveRoom @Id_client={0}", lie.ID_Client);
             //_dbContext.Live.Add(lie);
         }
         
@@ -35,7 +35,7 @@ namespace Libs.Repositories
             }
             else
             {
-                _dbContext.Live.Remove(lie);
+                _dbContext.Liveroom.Remove(lie);
             }
         }
     }

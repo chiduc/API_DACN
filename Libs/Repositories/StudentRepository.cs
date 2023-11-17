@@ -21,7 +21,7 @@ namespace Libs.Repositories
         }
         public void insertStudent(Client Student)
         {
-            _dbContext.Student.Add(Student);
+           // _dbContext.Student.Add(Student);
         }
     }
 }

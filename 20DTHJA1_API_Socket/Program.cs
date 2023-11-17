@@ -12,6 +12,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 }, ServiceLifetime.Transient);
 builder.Services.AddTransient<ProductService>();
+builder.Services.AddTransient<LiveRoomService>();
+builder.Services.AddTransient<ClientService>();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
