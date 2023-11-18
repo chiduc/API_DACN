@@ -24,5 +24,6 @@ namespace API_DACN.Controllers.api
             liveRoomService.insertLive(LR);
             return Ok(new { status = true, message = "" });
         }
+
     }
 }

@@ -4,6 +4,7 @@ using Libs.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using System.Diagnostics;
+using API_DACN.Controllers.api;
 
 namespace API_DACN.Controllers
 {
@@ -33,6 +34,7 @@ namespace API_DACN.Controllers
         }
         public static List<Report> LayDanhSachBaoCao(string chuoiKetNoi)
         {
+
             List<Report> danhSachBaoCao = new List<Report>();
 
             using (SqlConnection ketNoi = new SqlConnection(chuoiKetNoi))

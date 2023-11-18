@@ -1,6 +1,7 @@
 @{
     ViewData["Title"] = "Login Page";
 }
+@model Libs.Entities.LoginAdmin
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,11 +17,14 @@
     <div class="container">
         <form id="loginForm">
             <h2>Đăng nhập quản trị admin</h2>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+            <label for="ID_AT">ID_AT:</label>
+            <input type="text" id="ID_AT" name="ID_AT" required>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+            <label for="Name_Admin">Name_Admin:</label>
+            <input type="text" id="Name_Admin" name="Name_Admin" required>
+
+            <label for="Pass_Admin">Pass_Admin:</label>
+            <input type="password" id="Pass_Admin" name="Pass_Admin" required>
 
             <button type="button" onclick="login()">Login</button>
         </form>
@@ -30,7 +34,7 @@
     <script src="~/js/login.js"></script>
     <script>
         $(document).ready(function () {
-            $("#password").keypress(function (e) {
+            $("#Pass_Admin").keypress(function (e) {
                 if (e.which === 13) {
                     login();
                 }
@@ -38,15 +42,17 @@
         });
 
         function login() {
-            var username = $("#username").val();
-            var password = $("#password").val();
+            var ID_AT = $("#ID_AT").val();
+            var Name_Admin = $("#Name_Admin").val();
+            var Pass_Admin = $("#Pass_Admin").val();
 
             $.ajax({
                 type: "POST",
-                url: "/Home/Login",
-                data: { username: username, password: password },
+                url: "/api/LoginAdmins/insert_SupremeAdmin",
+                data: { ID_AT: ID_AT, Name_Admin: Name_Admin, Pass_Admin: Pass_Admin },
                 success: function (result) {
-                    if (result.success) {
+                    if (result.status) {
+                        // Thành công, thực hiện các hành động cần thiết (ví dụ: chuyển hướng trang)
                         window.location.href = "/Home/Home";
                     } else {
                         displayErrorMessage(result.message);
@@ -69,3 +75,4 @@
     </script>
 </body>
 </html>
+
