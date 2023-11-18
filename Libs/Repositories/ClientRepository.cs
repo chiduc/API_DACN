@@ -13,6 +13,7 @@ namespace Libs.Repositories
     public interface IPCllientRepository : IRepository<Client>
     {
         public void insert_Client(Client cli);
+        public void signIn_Client(Client cli);
         public  List<ClientModel> login_Client(ClientModel cli);
         public void update_Client_Live(Client cli);
         public void update_Client(Client cli);
@@ -40,6 +41,12 @@ namespace Libs.Repositories
         {
             throw new NotImplementedException();
         }
+        public void signIn_Client(Client cli)
+        {
+            _dbContext.Database.ExecuteSqlRaw("EXEC Proc_insert_Client @name_client = {0}, @pass_Client = {1}, @ngay_sinh = {2}, @SDT = {3}"
+                , cli.Name_Client, cli.Pass_Client, cli.NgaySinh, cli.SDT);
+        }
+
 
         public void update_Client_Live(Client cli)
         {

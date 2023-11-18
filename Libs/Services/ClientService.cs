@@ -32,6 +32,12 @@ namespace Libs.Services
         {
             return ClientRepository.login_Client(cli);
         }
+        public void signIn_Client(Client cli)
+        {
+            ClientRepository.signIn_Client(cli);
+            Save();
+        }
+        
         public void update_Client_Live(Client cli)
         {
             ClientRepository.update_Client_Live(cli);

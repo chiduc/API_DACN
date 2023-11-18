@@ -18,16 +18,6 @@ namespace API_DACN.Controllers.api
         {
             this.productService = productService;
         }
-        [HttpPost]
-        [Route("Login_Client")]
-        public IActionResult login_Client(string username, string password)
-        {
-            ClientModel clientModel = new ClientModel();
-            clientModel.Name_Client = username;
-            clientModel.Pass_Client = password;
-            List<ClientModel> cli_m = clientService.login_Client(clientModel);
-            return Ok(new { status = true, message = "", data = cli_m });
-        }
 
         //---------------------------------------------------------------------------------------------------------------------------------------------
         //---------------------------------------------------------------------------------------------------------------------------------------------

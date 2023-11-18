@@ -4,7 +4,7 @@ using Libs.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Query.Internal;
-
+using Microsoft.IdentityModel.Tokens;
 
 namespace API_DACN.Controllers.api
 {
@@ -26,9 +26,26 @@ namespace API_DACN.Controllers.api
             clientModel.Name_Client = username;
             clientModel.Pass_Client = password;
             List<ClientModel> cli_m = clientService.login_Client(clientModel);
+
+            if (cli_m.IsNullOrEmpty())
+            {
+                return NotFound(new { status = false, message = "khong co usser" });
+            }
         return Ok(new { status = true, message = "", data = cli_m });
         }
+        [HttpPost]
+        [Route("SignIn_Client")]
+        public IActionResult signIn_Client(string username, string password,DateTime ngaysinh, int SDT)
+        {
+            Client cli = new Client();
+            cli.Name_Client = username;
+            cli.Pass_Client = password;
+            cli.NgaySinh = ngaysinh;
+            cli.SDT = SDT;
+            clientService.signIn_Client(cli);
+            return Ok(new { status = true, });
 
+        }
 
     }
 }
