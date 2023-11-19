@@ -11,8 +11,9 @@ namespace Libs.Entities
     {
 		[Key]
         public int ID_Client { get; set; }
-        public string Name_Client { get; set; }    
-        public string Pass_Client { get; set; }
+        public string Name_Client { get; set; }
+        public string Username_Client { get; set; }    
+        public string Password_Client { get; set; }
 		public DateTime NgaySinh { get; set; }
         public int SDT { get; set; }
         public string Bio { get; set; }

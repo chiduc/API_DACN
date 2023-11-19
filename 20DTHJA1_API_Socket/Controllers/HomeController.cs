@@ -10,15 +10,6 @@ namespace API_DACN.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private ProductService productService;
-
-        public HomeController(ILogger<HomeController> logger, ProductService productService)
-        {
-            _logger = logger;
-
-        }
-
 
         public IActionResult Index()
         {
@@ -31,6 +22,12 @@ namespace API_DACN.Controllers
         public IActionResult ReportManager()
         {
             return View();
+        }
+
+        public IActionResult DangNhap(int ID_AT, string Aame_Admin, string Pass_Admin)
+        {
+
+            return RedirectToAction("Home");
         }
         public static List<Report> LayDanhSachBaoCao(string chuoiKetNoi)
         {

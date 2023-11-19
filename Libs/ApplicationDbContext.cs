@@ -8,7 +8,6 @@ namespace Libs
     {
         public DbSet<ClientModel> clientModels { get; set; }
         public DbSet<LiveRoom> Liveroom { get; set; }
-        public DbSet<Product> Product { get; set; }
         public DbSet<Client> Client { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

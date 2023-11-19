@@ -23,11 +23,6 @@ namespace Libs.Services
         {
             this.dbContext.SaveChanges();
         }
-        public void insert_Client(Client cli)
-        {
-            ClientRepository.insert_Client(cli);
-            Save();
-        }
         public List<ClientModel> login_Client(ClientModel cli)
         {
             return ClientRepository.login_Client(cli);
@@ -38,11 +33,11 @@ namespace Libs.Services
             Save();
         }
         
-        public void update_Client_Live(Client cli)
+/*      public void update_Client_Live(Client cli)
         {
             ClientRepository.update_Client_Live(cli);
             Save();
-        }
+        }*/
     }
    
 

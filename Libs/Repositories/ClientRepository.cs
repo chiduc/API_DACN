@@ -12,7 +12,6 @@ namespace Libs.Repositories
 {
     public interface IPCllientRepository : IRepository<Client>
     {
-        public void insert_Client(Client cli);
         public void signIn_Client(Client cli);
         public  List<ClientModel> login_Client(ClientModel cli);
         public void update_Client_Live(Client cli);
@@ -23,16 +22,10 @@ namespace Libs.Repositories
         public ClientRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
         }
-        public void insert_Client(Client cli)
-        {
-            _dbContext.Database.ExecuteSqlRaw("EXEC Proc_insert_Client " +
-                "@name_client={0}, @pass_Client={1},@ngay_sinh={2},@SDT={3}",
-                cli.Name_Client, cli.Pass_Client, cli.NgaySinh, cli.SDT);
-        }
         public List<ClientModel> login_Client(ClientModel cli)
         {
             var result = _dbContext.clientModels.FromSqlRaw("EXEC Proc_Login_Client @username ={0},@password={1}", 
-                cli.Name_Client, cli.Pass_Client).ToList();
+                cli.Username_Client, cli.Password_Client).ToList();
 
             return result; 
         }
@@ -43,8 +36,9 @@ namespace Libs.Repositories
         }
         public void signIn_Client(Client cli)
         {
-            _dbContext.Database.ExecuteSqlRaw("EXEC Proc_insert_Client @name_client = {0}, @pass_Client = {1}, @ngay_sinh = {2}, @SDT = {3}"
-                , cli.Name_Client, cli.Pass_Client, cli.NgaySinh, cli.SDT);
+            _dbContext.Database.ExecuteSqlRaw("EXEC Proc_insert_Client " +
+                "@Name_Client={0}, @Username_Client={1},@Password_Client={2},@ngay_sinh={3},@SDT={4}",
+                cli.Name_Client, cli.Username_Client, cli.Password_Client, cli.NgaySinh, cli.SDT);
         }
 
 

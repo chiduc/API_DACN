@@ -11,7 +11,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     //options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
 }, ServiceLifetime.Transient);
-builder.Services.AddTransient<ProductService>();
 builder.Services.AddTransient<LiveRoomService>();
 builder.Services.AddTransient<ClientService>();
 builder.Services.AddTransient<LoginAdminService>();

@@ -23,8 +23,8 @@ namespace API_DACN.Controllers.api
         public IActionResult login_Client(string username, string password)
         {
             ClientModel clientModel = new ClientModel();
-            clientModel.Name_Client = username;
-            clientModel.Pass_Client = password;
+            clientModel.Username_Client = username;
+            clientModel.Password_Client = password;
             List<ClientModel> cli_m = clientService.login_Client(clientModel);
 
             if (cli_m.IsNullOrEmpty())
@@ -35,11 +35,12 @@ namespace API_DACN.Controllers.api
         }
         [HttpPost]
         [Route("SignIn_Client")]
-        public IActionResult signIn_Client(string username, string password,DateTime ngaysinh, int SDT)
+        public IActionResult signIn_Client(string name,string username, string password,DateTime ngaysinh, int SDT)
         {
             Client cli = new Client();
-            cli.Name_Client = username;
-            cli.Pass_Client = password;
+            cli.Name_Client = name;
+            cli.Username_Client = username;
+            cli.Password_Client = password;
             cli.NgaySinh = ngaysinh;
             cli.SDT = SDT;
             clientService.signIn_Client(cli);
