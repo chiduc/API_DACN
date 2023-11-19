@@ -16,7 +16,7 @@ namespace Libs.Repositories
 {
     public interface LoginAdmintRepository : IRepository<LoginAdmin>
     {
-        public void insert_SupremeAdmin(LoginAdmin LG);
+        public List<LoginAdmin> LogIn_Admin(LoginAdmin LG);
 
     }
     public class LoginAdminRepository : RepositoryBase<LoginAdmin>, LoginAdmintRepository
@@ -24,11 +24,12 @@ namespace Libs.Repositories
         public LoginAdminRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
         }
-        public void insert_SupremeAdmin(LoginAdmin LG)
+        public List<LoginAdmin> LogIn_Admin(LoginAdmin LG)
         {
-            _dbContext.Database.ExecuteSqlRaw("EXEC Proc_insert_Admin " +
-                "@ID_KTK={0}, @TenDangNhap={1},@MatKhau={2}",
-                LG.ID_AT, LG.Name_Admin, LG.Pass_Admin);
+            var result =  _dbContext.loginAdmin.FromSqlRaw("EXEC Proc_LogIn_Admin " +
+                " @TenDangNhap={0},@MatKhau={1}", LG.Name_Admin, LG.Pass_Admin).ToList();
+
+            return result;
         }
     }
 }

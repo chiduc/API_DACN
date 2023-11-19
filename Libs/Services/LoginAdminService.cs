@@ -17,10 +17,10 @@ namespace Libs.Services
             this.dbContext = dbContext;
             this.LoginAdminRepository = new LoginAdminRepository(dbContext);
         }
-        public void insert_SupremeAdmin(LoginAdmin LG)
+        public List<LoginAdmin> LogIn_Admin(LoginAdmin LG)
         {
-            LoginAdminRepository.insert_SupremeAdmin(LG);
-            Save();
+            return LoginAdminRepository.LogIn_Admin(LG);
+ 
         }
         public void Save()
         {
