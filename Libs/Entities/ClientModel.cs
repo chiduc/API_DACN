@@ -14,6 +14,8 @@ namespace Libs.Entities
         public string name_client { get; set; }
         public string Username_Client { get; set; }
         public string Password_Client { get; set; }
+        public DateTime ngaysinh { get; set; }
+
         public bool IsClientLive { get; set; }
     }
 }

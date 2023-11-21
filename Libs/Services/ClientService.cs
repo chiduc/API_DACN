@@ -19,10 +19,6 @@ namespace Libs.Services
             this.dbContext = dbContext;
             this.ClientRepository = new ClientRepository(dbContext);
         }
-        public void Save()
-        {
-            this.dbContext.SaveChanges();
-        }
         public List<ClientModel> login_Client(ClientModel cli)
         {
             return ClientRepository.login_Client(cli);
@@ -30,14 +26,15 @@ namespace Libs.Services
         public void signIn_Client(Client cli)
         {
             ClientRepository.signIn_Client(cli);
-            Save();
+
         }
-        
-/*      public void update_Client_Live(Client cli)
+        public string Update_Client_Live(string name)
         {
-            ClientRepository.update_Client_Live(cli);
-            Save();
-        }*/
+            string outputMessage;
+            outputMessage = ClientRepository.Update_Client_Live(name);
+            return outputMessage;
+
+        }
     }
    
 

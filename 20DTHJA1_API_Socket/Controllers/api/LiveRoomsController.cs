@@ -14,14 +14,16 @@ namespace API_DACN.Controllers.api
         {
             this.liveRoomService = liveRoomService;
         }
-        [HttpPost]
+/*        Get_LiveRoom
+        Stop_LiveRoom
+        [HttpPost]*/
         [Route("insert_live")]
-        public IActionResult insert_live(int id_client)
+        public IActionResult Custom_LiveRoom(int id_client)
         {
             LiveRoom LR = new LiveRoom();
             LR.ID_Client = id_client;
 
-            liveRoomService.insertLive(LR);
+            liveRoomService.Custom_LiveRoom(LR);
             return Ok(new { status = true, message = "" });
         }
 

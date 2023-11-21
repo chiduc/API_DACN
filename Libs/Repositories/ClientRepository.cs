@@ -1,5 +1,6 @@
 ﻿using Libs.Data;
 using Libs.Entities;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,8 @@ namespace Libs.Repositories
     {
         public void signIn_Client(Client cli);
         public  List<ClientModel> login_Client(ClientModel cli);
-        public void update_Client_Live(Client cli);
         public void update_Client(Client cli);
+        public string Update_Client_Live(string name);
     }
     public class ClientRepository : RepositoryBase<Client> , IPCllientRepository
     {
@@ -41,10 +42,20 @@ namespace Libs.Repositories
                 cli.Name_Client, cli.Username_Client, cli.Password_Client, cli.NgaySinh, cli.SDT);
         }
 
-
-        public void update_Client_Live(Client cli)
+        public string Update_Client_Live(string name)
         {
-            _dbContext.Database.ExecuteSqlRaw("EXEC Proc_Update_Client_Live @id_client = {0}",cli.ID_Client);
+            string outputMessage;
+            var parameters = new[]
+            {
+                new SqlParameter("@Username_Client", name),
+                new SqlParameter("@OutputMessage", SqlDbType.NVarChar, 4000) { Direction = ParameterDirection.Output }
+             };
+            _dbContext.Database.ExecuteSqlRaw("EXEC Proc_Update_Client_Live @Username_Client, @OutputMessage OUTPUT", parameters);
+
+            outputMessage = parameters[1].Value?.ToString();
+
+            return outputMessage;
+
         }
     }
 }

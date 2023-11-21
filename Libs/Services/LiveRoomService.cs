@@ -19,24 +19,20 @@ namespace Libs.Services
             this.dbContext = dbContext;
             this.LiveRepository = new LiveRoomRepository(dbContext);
         }
-        public void Save()
+        public void Custom_LiveRoom(LiveRoom liv)
         {
-            this.dbContext.SaveChanges();
-        }
-        public void insertLive(LiveRoom lie)
-        {
-            LiveRepository.insertLive(lie);
-            Save();
+            LiveRepository.Custom_LiveRoom(liv);
+
 
         }
-        public void delete_live(LiveRoom lie)
+        public void Stop_LiveRoom(LiveRoom liv)
         {
-            if (lie != null)
-            {
-                LiveRepository.delete_live(lie);
-                Save();
-            }
+            LiveRepository.Stop_LiveRoom(liv);
 
+        }
+        public  List<LiveRoom> Get_LiveRoom()
+        {
+            return LiveRepository.Get_LiveRoom();
         }
     }
 

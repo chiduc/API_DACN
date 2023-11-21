@@ -11,8 +11,9 @@ namespace Libs.Repositories
 {
     public interface IPLiveRepository : IRepository<LiveRoom>
     {
-        public void insertLive(LiveRoom lie);
-        public void delete_live(LiveRoom lie);
+        public void Custom_LiveRoom(LiveRoom liv);
+        public void Stop_LiveRoom(LiveRoom liv);
+        public List<LiveRoom> Get_LiveRoom();
     }
     public class LiveRoomRepository : RepositoryBase<LiveRoom>, IPLiveRepository
     {
@@ -20,23 +21,20 @@ namespace Libs.Repositories
         {
         }
 
-        public void insertLive(LiveRoom lie)
+        public void Custom_LiveRoom(LiveRoom liv)
         {
-            _dbContext.Database.ExecuteSqlRaw("EXEC Proc_Insert_LiveRoom @Id_client={0}", lie.ID_Client);
-            //_dbContext.Live.Add(lie);
-        }
-        
+            _dbContext.Database.ExecuteSqlRaw("EXEC Proc_Custom_LiveRoom @Username_Client={0}", liv.Username_Client);
 
-        public void delete_live(LiveRoom lie)
+        }
+        public void Stop_LiveRoom(LiveRoom liv)
         {
-            if (lie == null)
-            {
-                return;
-            }
-            else
-            {
-                _dbContext.Liveroom.Remove(lie);
-            }
+            _dbContext.Database.ExecuteSqlRaw("EXEC Proc_Stop_LiveRoom @Username_Client={0}", liv.Username_Client);
+        }
+        public List<LiveRoom> Get_LiveRoom()
+        {
+            var result = _dbContext.Liveroom.FromSqlRaw("EXEC EXEC Proc_Get_LiveRoom ").ToList();
+
+            return result;
         }
     }
 }

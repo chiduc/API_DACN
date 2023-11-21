@@ -12,6 +12,8 @@ namespace Libs.Entities
     {
         [Key]
         public int ID_LR { get; set; }
+        public string Name_Client { get; set; }
+        public string Username_Client { get; set; }
         public int ID_Client { get; set; }
         public bool IsLive { get; set; }
     }
