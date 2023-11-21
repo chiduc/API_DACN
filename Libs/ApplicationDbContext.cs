@@ -6,6 +6,7 @@ namespace Libs
 {
     public class ApplicationDbContext: IdentityDbContext
     {
+        public DbSet<LoginAdmin> loginAdmin { get; set; }
         public DbSet<ClientModel> clientModels { get; set; }
         public DbSet<LiveRoom> Liveroom { get; set; }
         public DbSet<Client> Client { get; set; }

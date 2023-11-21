@@ -5,11 +5,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using System.Diagnostics;
 using API_DACN.Controllers.api;
+using API_DACN.Controllers;
+using _20DTHJA1_API_Socket.Controllers;
+using Libs.Repositories;
+using Libs;
 
 namespace API_DACN.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly LoginAdminService loginAdminService;
+ //       private ApplicationDbContext dbContext;
+/*        public HomeController(ApplicationDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+            this.LoginAdminRepository = new LoginAdminRepository(dbContext);
+        }*/
+        public HomeController(LoginAdminService loginAdminService)
+        {
+            this.loginAdminService = loginAdminService;
+        }
 
         public IActionResult Index()
         {
@@ -24,11 +39,33 @@ namespace API_DACN.Controllers
             return View();
         }
 
-        public IActionResult DangNhap(int ID_AT, string Aame_Admin, string Pass_Admin)
-        {
 
-            return RedirectToAction("Home");
+
+        public IActionResult DangNhap(string Name_Admin, string Pass_Admin)
+        {
+            LoginAdmin loginAdmin = new LoginAdmin();
+
+            loginAdmin.Name_Admin = Name_Admin;
+            loginAdmin.Pass_Admin = Pass_Admin;
+            List<LoginAdmin> loginAdmins = loginAdminService.LogIn_Admin(loginAdmin);
+            if (loginAdmins.Count == 0)
+            {
+                return RedirectToAction("index");
+            }
+            string name = loginAdmins[0].Name_Admin;
+            string pass = loginAdmins[0].Pass_Admin;
+            if (name == Name_Admin && pass == Pass_Admin)
+                return RedirectToAction("Home");
+            else
+                return RedirectToAction("index");
+
+            
+            // LoginDataHelper.InsertSupremeAdmin(ID_AT, Name_Admin, Pass_Admin);
+            // Xử lý kết quả nếu cần
+
         }
+
+
         public static List<Report> LayDanhSachBaoCao(string chuoiKetNoi)
         {
 
@@ -66,62 +103,9 @@ namespace API_DACN.Controllers
 
             return danhSachBaoCao;
         }
-        /*   public IActionResult ReportManager()
-           {
-               {
-                   // Tạo danh sách báo cáo với dữ liệu giả mạo
-                   List<Report> reports = new List<Report>
-           {
-               new Report { Id = 1, Title = "Báo cáo 1", Content = "Nội dung báo cáo 1", ReportDate = DateTime.Now.AddDays(-3), Reporter = "Người báo cáo 1", ReportedUser = "Người bị báo cáo 1", UserStatus = "Đang khóa", LockExpiration = DateTime.Now.AddDays(7) },
-               new Report { Id = 2, Title = "Báo cáo 2", Content = "Nội dung báo cáo 2", ReportDate = DateTime.Now.AddDays(-2), Reporter = "Người báo cáo 2", ReportedUser = "Người bị báo cáo 2", UserStatus = "Chưa khóa" },
-               new Report { Id = 1, Title = "Báo cáo 3", Content = "Nội dung báo cáo 3", ReportDate = DateTime.Now.AddDays(-1), Reporter = "Người báo cáo 1", ReportedUser = "Người bị báo cáo 1", UserStatus = "Chưa khóa" },
-                   new Report { Id = 1, Title = "Báo cáo 3", Content = "Nội dung báo cáo 3", ReportDate = DateTime.Now.AddDays(-1), Reporter = "Người báo cáo 1", ReportedUser = "Người bị báo cáo 1", UserStatus = "Chưa khóa" },
-               // Thêm các báo cáo khác nếu cần
-           };
-
-                   reports = Report.CalculateReportCount(reports);
-
-
-                   // Truyền danh sách báo cáo cho View
-                   return View(reports);
-               }
-           }*/
-
-
-
-
-        /*           public static List<Report> CalculateReportCount(List<Report> reports)
-                   {
-                       var groupedReports = reports
-                           .GroupBy(r => r.Id)
-                           .Select(g => new Report
-                           {
-                               Id = g.Key,
-                               ReportCount = g.Count(),
-                               // Giữ lại các thuộc tính khác của Report
-                               Title = g.First().Title,
-                               Content = g.First().Content,
-                               ReportDate = g.First().ReportDate,
-                               Reporter = g.First().Reporter,
-                               ReportedUser = g.First().ReportedUser,
-                               // Thêm các thuộc tính khác nếu có
-                           })
-                           .ToList();
-
-                       return groupedReports;
-                   }*/
     
 
 
-    public class User
-        {
-            public int Id { get; set; }
-            public string Username { get; set; }
-            public string Password { get; set; }
-            public bool IsLocked { get; set; }
-            public DateTime? LockExpiration { get; set; }
-
-        }
 
 
 
