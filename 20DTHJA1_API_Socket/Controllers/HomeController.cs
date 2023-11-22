@@ -9,21 +9,26 @@ using API_DACN.Controllers;
 using _20DTHJA1_API_Socket.Controllers;
 using Libs.Repositories;
 using Libs;
+using System.Net.Sockets;
 
 namespace API_DACN.Controllers
 {
     public class HomeController : Controller
     {
         private readonly LoginAdminService loginAdminService;
- //       private ApplicationDbContext dbContext;
-/*        public HomeController(ApplicationDbContext dbContext)
-        {
-            this.dbContext = dbContext;
-            this.LoginAdminRepository = new LoginAdminRepository(dbContext);
-        }*/
-        public HomeController(LoginAdminService loginAdminService)
+
+        private readonly ClientService clientService;
+
+        //       private ApplicationDbContext dbContext;
+        /*        public HomeController(ApplicationDbContext dbContext)
+                {
+                    this.dbContext = dbContext;
+                    this.LoginAdminRepository = new LoginAdminRepository(dbContext);
+                }*/
+        public HomeController(LoginAdminService loginAdminService, ClientService clientService)
         {
             this.loginAdminService = loginAdminService;
+            this.clientService = clientService;
         }
 
         public IActionResult Index()
@@ -34,11 +39,32 @@ namespace API_DACN.Controllers
         {
             return View();
         }
-        public IActionResult ReportManager()
+        public IActionResult ReportManager(string Name_Client, bool IsClientLive, int Count_RP, int ID_Is_Live, string Image_Client, string Bio, int SDT, DateTime NgaySinh, string Password_Client, int ID_Client, String Username_Client, String OutputMessage)
         {
-            return View();
-        }
+            Client client = new Client();
+/*            client.ID_Client = ID_Client;*/
+            ViewBag.ID_Client = client.ID_Client;
+            ViewBag.Name_Client = client.Name_Client;
+            ViewBag.IsClientLive = client.IsClientLive;
+            ViewBag.Count_RP = client.Count_RP;
+            ViewBag.ID_Is_Live = client.ID_Is_Live;
+            ViewBag.Image_Client = client.Image_Client;
+            ViewBag.Bio = client.Bio;
+            ViewBag.SDT = client.SDT;
+            ViewBag.NgaySinh = client.NgaySinh;
+            ViewBag.Password_Client = client.Password_Client;
+            ViewBag.Username_Client = client.Username_Client;
 
+
+
+            return View(ReportManager);
+
+        }
+/*        public HomeController(ClientService clientService)
+        {
+            this.ClientService = clientService;
+        }
+*/
 
 
         public IActionResult DangNhap(string Name_Admin, string Pass_Admin)
@@ -57,6 +83,9 @@ namespace API_DACN.Controllers
             if (name == Name_Admin && pass == Pass_Admin)
                 return RedirectToAction("Home");
             else
+            {
+
+            }
                 return RedirectToAction("index");
 
             

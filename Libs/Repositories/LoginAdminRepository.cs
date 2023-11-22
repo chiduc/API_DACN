@@ -26,11 +26,12 @@ namespace Libs.Repositories
         }
         public List<LoginAdmin> LogIn_Admin(LoginAdmin LG)
         {
-            var result =  _dbContext.loginAdmin.FromSqlRaw("EXEC Proc_LogIn_Admin " +
+            var result =  _dbContext.loginAdmin.FromSqlRaw("EXEC Proc_DangNhap_Admin " +
                 " @TenDangNhap={0},@MatKhau={1}", LG.Name_Admin, LG.Pass_Admin).ToList();
 
             return result;
         }
+
     }
 }
 
